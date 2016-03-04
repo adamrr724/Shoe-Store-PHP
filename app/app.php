@@ -26,6 +26,65 @@
 		return $app['twig']->render('index.html.twig');
 	});
 
+	$app->get('/stores', function() use ($app){
+		$stores = Store::getAll();
+		return $app['twig']->render('stores.html.twig', array('stores' => $stores));
+	});
+
+	$app->get('/stores/add', function() use ($app){
+		return $app['twig']->render('stores_add.html.twig');
+	});
+
+	$app->post('/store/addstore', function() use ($app){
+		$store_name = $_POST['store_name'];
+		$store = new Store($store_name);
+		$store->save();
+		return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
+	});
+
+	$app->get('/store/{id}/edit', function($id) use ($app){
+		$store = Store::find($id);
+		return $app['twig']->render('stores_edit.html.twig', array('store' => $store));
+	});
+
+	$app->patch('/store/{id}/update_name', function($id) use ($app){
+		$store = Store::find($id);
+		$new_store_name = $_POST['store_name'];
+		$store->update($new_store_name);
+		return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
+	});
+
+	$app->post('/store/{id}/addbrand', function($id) use ($app){
+		$store = Store::find($id);
+		$brand_name = $_POST['brand_name'];
+		$brand = new Brand($brand_name);
+		$brand->save();
+		$store->addBrand($brand);
+		return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
+	});
+
+	$app->delete('/store/{id}/delete', function($id) use ($app){
+		$store = Store::find($id);
+		$store->delete();
+		return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
+	});
+
+	$app->get('/brands', function() use ($app){
+		$brands = Brand::getAll();
+		return $app['twig']->render('brands.html.twig', array('brands' => $brands));
+	});
+
+	$app->get('/brands/add', function() use ($app){
+		return $app['twig']->render('brands_add.html.twig');
+	});
+
+	$app->post('/brand/addbrand', function() use ($app){
+		$brand_name = $_POST['brand_name'];
+		$brand = new Brand($brand_name);
+		$brand->save();
+		return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll()));
+	});
+
 	return $app;
 
 ?>
