@@ -22,34 +22,50 @@
 
 		function test_getters()
 		{
-		//Arrange
-		$brand_name = "Nike";
-		$id = 1;
-		$test_brand = new Brand($brand_name, $id);
+			//Arrange
+			$brand_name = "Nike";
+			$id = 1;
+			$test_brand = new Brand($brand_name, $id);
 
-		//Act
-		$result1 = $test_brand->getBrandName();
-		$result2 = $test_brand->getId();
+			//Act
+			$result1 = $test_brand->getBrandName();
+			$result2 = $test_brand->getId();
 
-		//Assert
-		$this->assertEquals("Nike", $result1);
-		$this->assertEquals(1, $result2);
+			//Assert
+			$this->assertEquals("Nike", $result1);
+			$this->assertEquals(1, $result2);
 		}
 
 		function test_save()
-	   {
-		 //Arrange
-   		$brand_name = "Nike";
-   		$id = 1;
-   		$test_brand = new Brand($brand_name, $id);
+		{
+			//Arrange
+			$brand_name = "Nike";
+			$id = null;
+			$test_brand = new Brand($brand_name, $id);
 
-		//Act
-		$test_brand->save();
-	 	$result = Brand::getAll();
+			//Act
+			$test_brand->save();
+			$result = Brand::getAll();
 
-		//Assert
-		$this->assertEquals([$test_brand], $result);
-	   }
+			//Assert
+			$this->assertEquals([$test_brand], $result);
+		}
+
+		function test_getAll()
+		{
+			//Arrange
+			$brand_name = "Nike";
+			$id = null;
+			$test_brand = new Brand($brand_name, $id);
+			$test_brand->save();
+
+			$brand_name2 = "Adidas";
+			$test_brand2 = new Brand($brand_name2, $id);
+			$test_brand2->save();
+
+			$result = Brand::getAll();
+			$this->assertEquals([$test_brand, $test_brand2], $result);
+		}
 	}
 
 ?>
