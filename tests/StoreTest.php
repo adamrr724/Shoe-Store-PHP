@@ -1,10 +1,20 @@
 <?php
 
+	/**
+	* @backupGlobals disabled
+	* @backupStaticAttributes disabled
+	*/
+
 	require_once 'src/Store.php';
 	require_once 'src/Brand.php';
 
 	class StoreTest extends PHPUnit_Framework_TestCase
 	{
+		// protected function tearDown()
+		// {
+		// 	Brand::deleteAll();
+		// 	Store::deleteAll();
+		// }
 
 		function test_getters()
 		{
