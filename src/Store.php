@@ -4,7 +4,7 @@
 		private $store_name;
 		private $id;
 
-		function __contruct($store_name, $id = null)
+		function __construct($store_name, $id = null)
 		{
 			$this->store_name = $store_name;
 			$this->id = $id;
@@ -15,9 +15,9 @@
 			return $this->store_name;
 		}
 
-		function setStoreName()
+		function setStoreName($new_store_name)
 		{
-			$this->store_name = $store_name;
+			$this->store_name = $new_store_name;
 		}
 
 		function getId()
