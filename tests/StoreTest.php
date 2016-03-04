@@ -159,6 +159,7 @@
 			//Assert
 			$this->assertEquals($test_store->getBrands(), [$test_brand]);
 		}
+		
 		function test_getBrands()
 		{
 			//Arrange
