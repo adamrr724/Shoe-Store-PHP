@@ -38,8 +38,12 @@
 	$app->post('/store/addstore', function() use ($app){
 		$store_name = $_POST['store_name'];
 		$store = new Store($store_name);
-		$store->save();
-		return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
+		if ($store->save() == false){
+			$message = array('type' => 'danger','text' => 'That store already exists. Store not added to page.');
+		} else {
+			$store->save();
+			}
+		return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'message' => $message));
 	});
 
 	$app->get('/store/{id}/edit', function($id) use ($app){
@@ -86,8 +90,12 @@
 	$app->post('/brand/addbrand', function() use ($app){
 		$brand_name = $_POST['brand_name'];
 		$brand = new Brand($brand_name);
-		$brand->save();
-		return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll(), 'stores' => Store::getAll()));
+		if ($brand->save() == false){
+			$message = array('type' => 'danger','text' => 'That brand already exists. Brand not added to page.');
+		} else {
+			$brand->save();
+			}
+		return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll(), 'stores' => Store::getAll(), 'message' => $message));
 	});
 
 	$app->post('/brand/{id}/store_add', function($id) use ($app){

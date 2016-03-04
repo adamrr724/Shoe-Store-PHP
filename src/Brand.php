@@ -27,6 +27,12 @@
 
 		function save()
 		{
+			$existing_brands = $GLOBALS['DB']->query("SELECT * FROM brands");
+			foreach ($existing_brands as $brand) {
+				if ($brand['brand_name'] == $this->getBrandName()) {
+					return false;
+				} 
+			}
 			$GLOBALS['DB']->exec("INSERT INTO brands (brand_name) VALUES ('{$this->getBrandName()}');");
 			$this->id = $GLOBALS['DB']->lastInsertId();
 		}

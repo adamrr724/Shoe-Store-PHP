@@ -26,6 +26,12 @@
 		}
 		function save()
 		{
+			$existing_stores = $GLOBALS['DB']->query("SELECT * FROM stores");
+			foreach ($existing_stores as $store) {
+				if ($store['store_name'] == $this->getStoreName()) {
+					return false;
+				}
+			}
 			$GLOBALS['DB']->exec("INSERT INTO stores (store_name) VALUES ('{$this->getStoreName()}');");
 			$this->id = $GLOBALS['DB']->lastInsertId();
 		}
