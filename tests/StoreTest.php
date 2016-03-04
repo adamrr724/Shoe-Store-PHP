@@ -119,6 +119,26 @@
 		   //Assert
 		   $this->assertEquals($new_store_name, $test_store->getStoreName());
 	   }
+
+	   function test_delete()
+	   {
+		   //Arrange
+		   $store_name = "Nike Store";
+		   $id = null;
+		   $test_store = new Store($store_name, $id);
+		   $test_store->save();
+
+		   $store_name2 = "Footlocker";
+		   $test_store2 = new Store($store_name2, $id);
+		   $test_store2->save();
+
+		   //Act
+		   $test_store->delete();
+		   $result = Store::getAll();
+
+		   //Assert
+		   $this->assertEquals([$test_store2], $result);
+	   }
 	}
 
 ?>
