@@ -69,6 +69,12 @@
 		return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll()));
 	});
 
+	$app->get('/stores/search', function() use ($app){
+		$search_term = $_GET['store_name'];
+		$stores = Store::search($search_term);
+		return $app['twig']->render('stores.html.twig', array('stores' => $stores));
+	});
+
 	$app->get('/brands', function() use ($app){
 		$brands = Brand::getAll();
 		return $app['twig']->render('brands.html.twig', array('brands' => $brands, 'stores' => Store::getAll()));
@@ -97,6 +103,12 @@
 		$brand = Brand::find($id);
 		$brand->delete();
 		return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll(), 'stores' => Store::getAll()));
+	});
+
+	$app->get('/brands/search', function() use ($app){
+		$search_term = $_GET['brand_name'];
+		$brands = Brand::search($search_term);
+		return $app['twig']->render('brands.html.twig', array('brands' => $brands, 'stores' => Store::getAll()));
 	});
 
 	return $app;
