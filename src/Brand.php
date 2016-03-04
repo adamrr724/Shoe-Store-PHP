@@ -1,14 +1,27 @@
 <?php
 	 class Brand
 		{
-		private property;
+		private $brand_name;
+		private $id;
 
-		 function getProperty(){
-			return $this->property;
-			}
+		function __construct($brand_name, $id = null)
+		{
+			$this->brand_name = $brand_name
+		}
 
-		function setProperty(){
-			$this->property = $property;
+		function getBrandName()
+		{
+			return $this->brand_name;
+		}
+
+		function setBrandName()
+		{
+			$this->brand_name = $brand_name;
+		}
+
+		function getId()
+		{
+			return $this->id;
 		}
 	}
  ?>
