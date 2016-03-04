@@ -156,6 +156,26 @@
 			//Assert
 			$this->assertEquals($test_brand->getStores(), [$test_store, $test_store2]);
 		}
+
+		function test_delete()
+		{
+			//Arrange
+			$brand_name = "Nike";
+			$id = null;
+			$test_brand = new Brand($brand_name, $id);
+			$test_brand->save();
+
+			$brand_name2 = "Adidas";
+			$test_brand2 = new Brand($brand_name2, $id);
+			$test_brand2->save();
+
+			//Act
+			$test_brand->delete();
+			$result = Brand::getAll();
+
+			//Assert
+			$this->assertEquals([$test_brand2], $result);
+		}
 	}
 
 ?>

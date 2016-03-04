@@ -27,6 +27,14 @@
                    {% else %}
                        <p>This brand is not found in any store.</p>
                    {% endif %}
+                   <form action="/brand/{{ brand.getId }}/store_add" method="post">
+                       <select name="store_name">
+                           {% for store in stores %}
+                           <option value="{{ store.getId }}">{{ store.getStoreName }}</option>
+                           {% endfor %}
+                       </select>
+                       <button class="btn btn-primary" type="submit" name="button"> Add Store </button>
+                   </form>
            {% endfor %}
            </ul>
         {% else %}
