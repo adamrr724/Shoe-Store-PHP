@@ -24,5 +24,10 @@
 		{
 			return $this->id;
 		}
+		function save()
+		{
+			$GLOBALS['DB']->exec("INSERT INTO stores (sotre_name) VALUES ('{$this->getStoreName()}');");
+			$this->id = $GLOBALS['DB']->lastInsertId();
+		}
 	}
  ?>
