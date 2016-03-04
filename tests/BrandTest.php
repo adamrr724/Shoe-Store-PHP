@@ -176,6 +176,27 @@
 			//Assert
 			$this->assertEquals([$test_brand2], $result);
 		}
+
+		function test_search()
+		{
+			//Arrange
+			$brand_name = "Nike";
+			$id = null;
+			$test_brand = new Brand($brand_name, $id);
+			$test_brand->save();
+
+			$brand_name2 = "Adidas";
+			$test_brand2 = new Brand($brand_name2, $id);
+			$test_brand2->save();
+
+			$search_term = "Ni";
+
+			//Act
+			$result = Brand::search($search_term);
+
+			//Assert
+			$this->assertEquals([$test_brand], $result);
+		}
 	}
 
 ?>

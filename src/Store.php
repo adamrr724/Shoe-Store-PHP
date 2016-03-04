@@ -92,6 +92,20 @@
 			return $brands;
 		}
 
+		static function search($search_term)
+		{
+			$query = $GLOBALS['DB']->query("SELECT * FROM stores WHERE store_name LIKE '%{$search_term}%'");
+			$all_stores = $query->fetchAll(PDO::FETCH_ASSOC);
+			$found_stores = array();
+			foreach ($all_stores as $store) {
+				$store_name = $store['store_name'];
+				$id = $store['id'];
+				$new_store = new Store($store_name, $id);
+				array_push($found_stores, $new_store);
+			}
+			return $found_stores;
+		}
+
 
 	}
  ?>

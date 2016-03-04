@@ -159,7 +159,7 @@
 			//Assert
 			$this->assertEquals($test_store->getBrands(), [$test_brand]);
 		}
-		
+
 		function test_getBrands()
 		{
 			//Arrange
@@ -187,6 +187,27 @@
 
 			//Assert
 			$this->assertEquals($test_store->getBrands(), [$test_brand, $test_brand2]);
+		}
+
+		function test_search()
+		{
+			//Arrange
+			$store_name = "Nike Store";
+			$id = null;
+			$test_store = new Store($store_name, $id);
+			$test_store->save();
+
+			$store_name2 = "Footlocker";
+			$test_store2 = new Store($store_name2, $id);
+			$test_store2->save();
+
+			$search_term = "Nike";
+
+			//Act
+			$result = Store::search($search_term);
+
+			//Assert
+			$this->assertEquals([$test_store], $result);
 		}
 
 	}

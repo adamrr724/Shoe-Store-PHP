@@ -35,6 +35,11 @@
                        </select>
                        <button class="btn btn-primary" type="submit" name="button"> Add Store </button>
                    </form>
+                   <br>
+                   <form action="/brand/{{ brand.getId }}/delete" method="post">
+                       <input name="_method" type="hidden" value="delete">
+                       <button type="submit" class="btn btn-danger" name="button">Delete Brand</button>
+                   </form>
            {% endfor %}
            </ul>
         {% else %}

@@ -86,5 +86,19 @@
 		   $GLOBALS['DB']->exec("DELETE FROM brands WHERE id = {$this->getId()};");
 		   $GLOBALS['DB']->exec("DELETE FROM stores_brands WHERE brand_id = {$this->getId()};");
 		}
+
+		static function search($search_term)
+		{
+			$query = $GLOBALS['DB']->query("SELECT * FROM brands WHERE brand_name LIKE '%{$search_term}%'");
+			$all_brands = $query->fetchAll(PDO::FETCH_ASSOC);
+			$found_brands = array();
+			foreach ($all_brands as $brand) {
+				$brand_name = $brand['brand_name'];
+				$id = $brand['id'];
+				$new_brand = new Brand($brand_name, $id);
+				array_push($found_brands, $new_brand);
+			}
+			return $found_brands;
+		}
 	}
  ?>
