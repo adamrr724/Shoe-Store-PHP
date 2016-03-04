@@ -26,7 +26,7 @@
 		}
 		function save()
 		{
-			$GLOBALS['DB']->exec("INSERT INTO stores (sotre_name) VALUES ('{$this->getStoreName()}');");
+			$GLOBALS['DB']->exec("INSERT INTO stores (store_name) VALUES ('{$this->getStoreName()}');");
 			$this->id = $GLOBALS['DB']->lastInsertId();
 		}
 
@@ -41,6 +41,11 @@
 				 array_push($stores, $new_store);
 			}
 			return $stores;
+		}
+
+		static function deleteAll()
+		{
+			$GLOBALS['DB']->exec("DELETE FROM stores");
 		}
 	}
  ?>
