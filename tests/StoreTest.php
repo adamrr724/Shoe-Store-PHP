@@ -83,6 +83,25 @@
 		   //Assert
 		   $this->assertEquals([], Store::getAll());
 	   }
+
+	   function test_find()
+	   {
+		   //Arrange
+		   $store_name = "Nike Store";
+		   $id = null;
+		   $test_store = new Store($store_name, $id);
+		   $test_store->save();
+
+		   $store_name2 = "Footlocker";
+		   $test_store2 = new Store($store_name2, $id);
+		   $test_store2->save();
+
+		   //Act
+		   $result = Store::find($test_store->getId());
+
+		   //Assert
+		   $this->assertEquals($test_store, $result);
+	   }
 	}
 
 ?>
