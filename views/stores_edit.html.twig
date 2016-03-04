@@ -24,7 +24,11 @@
 <br>
         <form action="/store/{{ store.getId }}/addbrand" method="post">
             <label for="brand_name">Add a Brand</label>
-            <input type="text" name="brand_name">
+            <select name="brand_name">
+                {% for brand in brands %}
+                <option value="{{ brand.getId }}">{{ brand.getBrandName }}</option>
+                {% endfor %}
+            </select>
             <button type="submit" class="btn btn-primary" name="button">Add</button>
         </form>
 <br>
