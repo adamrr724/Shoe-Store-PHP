@@ -81,6 +81,12 @@
 
 		function addBrand($brand)
 		{
+			$existing_store_brands = $GLOBALS['DB']->query("SELECT * FROM stores_brands");
+			foreach ($existing_store_brands as $store_brand) {
+				if ($store_brand['brand_id'] == $brand->getId() and $store_brand['store_id'] == $this->getId()) {
+					return false;
+				}
+			}
 			$GLOBALS['DB']->exec("INSERT INTO stores_brands (store_id, brand_id) VALUES ({$this->getId()}, {$brand->getId()}) ;");
 		}
 

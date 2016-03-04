@@ -23,7 +23,7 @@ This allows you to find stores and brands of shoes. You can add brands to stores
 
 ## Known Bugs
 
-No known bugs.
+Adds message when it shouldnt in if statement on brand and shoe pages.
 
 
 ## Support and contact details

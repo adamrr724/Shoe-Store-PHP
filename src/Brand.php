@@ -31,7 +31,7 @@
 			foreach ($existing_brands as $brand) {
 				if ($brand['brand_name'] == $this->getBrandName()) {
 					return false;
-				} 
+				}
 			}
 			$GLOBALS['DB']->exec("INSERT INTO brands (brand_name) VALUES ('{$this->getBrandName()}');");
 			$this->id = $GLOBALS['DB']->lastInsertId();
@@ -70,6 +70,12 @@
 
 		function addStore($store)
 		{
+			$existing_store_brands = $GLOBALS['DB']->query("SELECT * FROM stores_brands");
+			foreach ($existing_store_brands as $store_brand) {
+				if ($store_brand['store_id'] == $store->getId() and $store_brand['brand_id'] == $this->getId()) {
+					return false;
+				}
+			}
 			$GLOBALS['DB']->exec("INSERT INTO stores_brands (brand_id, store_id) VALUES ({$this->getId()}, {$store->getId()}) ;");
 		}
 

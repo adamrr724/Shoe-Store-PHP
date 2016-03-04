@@ -66,8 +66,12 @@
 		$brand_id = $_POST['brand_name'];
 		$brand = Brand::find($brand_id);
 		$store = Store::find($id);
-		$store->addBrand($brand);
-		$message = null;
+		if (!$store->addBrand($brand)) {
+			$message = array('type' => 'danger','text' => 'That brand already exists. Brand not added to store.');
+		} else {
+			$store->addBrand($brand);
+			$message = null;
+			}
 		return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'message' => $message));
 	});
 
@@ -112,8 +116,12 @@
 		$store_id = $_POST['store_name'];
 		$store = Store::find($store_id);
 		$brand = Brand::find($id);
-		$brand->addStore($store);
-		$message = null;
+		if (!$brand->addStore($store)) {
+			$message = array('type' => 'danger','text' => 'That store already exists. Store not added to brand.');
+		} else {
+			$brand->addStore($store);
+			$message = null;
+			}
 		return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll(), 'stores' => Store::getAll(), 'message' => $message));
 	});
 
